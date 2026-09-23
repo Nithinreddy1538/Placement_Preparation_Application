@@ -64,44 +64,29 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database Configuration with MySQL and resilient fallback
 def get_database_config():
     db_engine = os.getenv('DB_ENGINE', 'mysql').lower()
-    db_name = os.getenv('DB_NAME', 'placement_prep_db')
-    db_user = os.getenv('DB_USER', 'root')
-    db_password = os.getenv('DB_PASSWORD', 'Nithin@1538')
-    db_host = os.getenv('DB_HOST', '127.0.0.1')
-    db_port = int(os.getenv('DB_PORT', '3306'))
+    db_name = os.getenv('DB_NAME', 'defaultdb')
+    db_user = os.getenv('DB_USER', 'avnadmin')
+    db_password = os.getenv('DB_PASSWORD', '')
+    db_host = os.getenv('DB_HOST', '')
+    db_port = os.getenv('DB_PORT', '3306')
+    db_ssl_mode = os.getenv('DB_SSL_MODE', 'REQUIRED')
 
     if db_engine == 'mysql':
-        try:
-            import MySQLdb
-            conn = MySQLdb.connect(
-                host=db_host,
-                user=db_user,
-                passwd=db_password,
-                port=db_port,
-                connect_timeout=3
-            )
-            # Ensure database exists
-            cur = conn.cursor()
-            cur.execute(f"CREATE DATABASE IF NOT EXISTS `{db_name}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
-            cur.close()
-            conn.close()
-
-            return {
-                'default': {
-                    'ENGINE': 'django.db.backends.mysql',
-                    'NAME': db_name,
-                    'USER': db_user,
-                    'PASSWORD': db_password,
-                    'HOST': db_host,
-                    'PORT': str(db_port),
-                    'OPTIONS': {
-                        'charset': 'utf8mb4',
-                        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-                    }
-                }
+        return {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': db_name,
+                'USER': db_user,
+                'PASSWORD': db_password,
+                'HOST': db_host,
+                'PORT': db_port,
+                'OPTIONS': {
+                    'charset': 'utf8mb4',
+                    'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                    'ssl_mode': db_ssl_mode,
+                },
             }
-        except Exception as e:
-            print(f"[Warning] MySQL connection could not be established ({e}). Falling back to SQLite.")
+        }
 
     return {
         'default': {
@@ -109,7 +94,6 @@ def get_database_config():
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 DATABASES = get_database_config()
 
 # Password validation
