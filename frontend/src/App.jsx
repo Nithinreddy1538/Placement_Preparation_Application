@@ -309,25 +309,25 @@ export default function App() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#94a3b8',
-              fontSize: '0.775rem',
+              background: '#fff7ed',
+              border: '1.5px solid #fed7aa',
+              color: '#ea580c',
+              fontSize: '0.825rem',
+              fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '4px',
-              padding: '4px 8px',
-              borderRadius: '6px',
+              gap: '6px',
+              padding: '6px 14px',
+              borderRadius: '10px',
               textDecoration: 'none',
+              boxShadow: '0 2px 6px rgba(234, 88, 12, 0.1)',
               transition: 'all 0.15s',
             }}
             title="Open Super Admin Portal separately in a new tab (Shortcut: Alt+A or Ctrl+Shift+A)"
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ea580c')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
           >
-            <Lock size={12} />
-            <span>Admin Portal (Open Separately ↗)</span>
+            <ShieldCheck size={15} color="#ea580c" />
+            <span>Super Admin Portal ↗</span>
           </a>
         </div>
       </footer>
