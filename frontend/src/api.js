@@ -1,6 +1,4 @@
-const API_BASE = (typeof window !== 'undefined' && window.location)
-  ? (window.location.port === '5173' ? '/api' : `http://${window.location.hostname || '127.0.0.1'}:8000/api`)
-  : 'http://127.0.0.1:8000/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Helper to handle fetch responses and errors
