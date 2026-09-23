@@ -15,7 +15,14 @@ export default function App() {
   const checkIsAdminPage = () => {
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
-    return path.startsWith('/admin') || hash.startsWith('#/admin') || hash === '#admin';
+    const search = window.location.search.toLowerCase();
+    return (
+      path.startsWith('/admin') ||
+      hash.startsWith('#/admin') ||
+      hash === '#admin' ||
+      search.includes('view=admin') ||
+      search.includes('admin=1')
+    );
   };
 
   const [isAdminPage, setIsAdminPage] = useState(checkIsAdminPage);
@@ -73,7 +80,7 @@ export default function App() {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') || (e.altKey && e.key.toLowerCase() === 'a')) {
         e.preventDefault();
-        window.open('/admin', '_blank');
+        window.open('/#/admin', '_blank');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -298,7 +305,7 @@ export default function App() {
             Placement Preparation & Assessment Portal • Dynamic Courses, Topics, Word/PDF Sync & Instant Scorecards
           </p>
           <a
-            href="/admin"
+            href="/#/admin"
             target="_blank"
             rel="noopener noreferrer"
             style={{

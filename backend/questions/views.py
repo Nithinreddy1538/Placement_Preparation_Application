@@ -24,7 +24,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all().prefetch_related('topics', 'questions', 'materials')
     serializer_class = CourseSerializer
 
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get'], url_path='stats')
     def stats(self, request):
         total_courses = Course.objects.count()
         total_topics = Topic.objects.count()

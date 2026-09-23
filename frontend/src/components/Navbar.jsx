@@ -110,7 +110,7 @@ export default function Navbar({
             {adminUser && (
               <button
                 className="nav-btn"
-                onClick={() => window.open('/admin', '_blank')}
+                onClick={() => window.open('/#/admin', '_blank')}
                 style={{
                   color: '#ea580c',
                   fontWeight: 700,
@@ -288,7 +288,7 @@ export default function Navbar({
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      window.open('/admin', '_blank');
+                      window.open('/#/admin', '_blank');
                     }}
                     style={{
                       width: '100%',
