@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('questions.urls')),
+    path('', include('questions.urls')),  # Fallback to allow requests like /courses/stats/ or /courses/ without /api prefix
 ]
 
 from django.views.static import serve

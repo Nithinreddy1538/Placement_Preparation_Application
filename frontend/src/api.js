@@ -1,4 +1,15 @@
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+// Normalize API_BASE so both 'https://domain.com' and 'https://domain.com/api' work seamlessly
+const getApiBase = () => {
+  let url = import.meta.env.VITE_API_URL;
+  if (!url || !url.trim()) return '/api';
+  url = url.trim().replace(/\/+$/, '');
+  if (url.startsWith('http') && !url.endsWith('/api')) {
+    url += '/api';
+  }
+  return url;
+};
+
+const API_BASE = getApiBase();
 
 /**
  * Helper to handle fetch responses and errors
