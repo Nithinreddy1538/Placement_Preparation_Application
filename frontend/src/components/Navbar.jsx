@@ -45,21 +45,17 @@ export default function Navbar({
               handleNavClick('dashboard');
             }}
           >
-            <div
+            <img
+              src="/logo.png"
+              alt="Placement Prep Logo"
               style={{
                 width: '36px',
                 height: '36px',
                 borderRadius: '10px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ffffff',
-                boxShadow: '0 3px 10px rgba(2, 132, 199, 0.28)',
+                objectFit: 'contain',
+                boxShadow: '0 3px 10px rgba(99, 102, 241, 0.25)',
               }}
-            >
-              <Code2 size={20} />
-            </div>
+            />
             <span>Placement Prep</span>
             <span className="brand-badge">2026</span>
           </a>
@@ -219,7 +215,16 @@ export default function Navbar({
           <div className="mobile-drawer-content" onClick={(e) => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: '1.5px solid #f1f5f9', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Code2 size={22} color="#0284c7" />
+                <img
+                  src="/logo.png"
+                  alt="Placement Prep Logo"
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '8px',
+                    objectFit: 'contain',
+                  }}
+                />
                 <span style={{ fontWeight: 800, fontSize: '1.1rem', color: '#0369a1' }}>Placement Prep</span>
               </div>
               <button
