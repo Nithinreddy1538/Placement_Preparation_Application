@@ -24,7 +24,6 @@ import {
 import api from '../api';
 import SubjectCreateModal from '../components/SubjectCreateModal';
 import DailyPdfUploadModal from '../components/DailyPdfUploadModal';
-import QuestionModal from '../components/QuestionModal';
 
 const ICON_MAP = {
   code: Terminal,
@@ -50,7 +49,6 @@ export default function SubjectStudy({ initialCourseId, initialTopicId, onStartP
   // Modals state (Students & Admins can create subjects & upload daily PDFs)
   const [isSubjectModalOpen, setIsSubjectModalOpen] = useState(false);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
-  const [isAddQuizModalOpen, setIsAddQuizModalOpen] = useState(false);
 
   const handleDeleteMaterial = async () => {
     if (!activeConcept) return;
@@ -316,23 +314,6 @@ export default function SubjectStudy({ initialCourseId, initialTopicId, onStartP
             <FileUp size={17} />
             <span>+ Add Daily PDF</span>
           </button>
-
-          {/* Super Admin Add Quiz Button */}
-          {adminUser && (
-            <button
-              className="primary-btn"
-              style={{
-                background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
-                color: '#ffffff',
-                fontWeight: 700,
-              }}
-              onClick={() => setIsAddQuizModalOpen(true)}
-              title="Add a placement quiz question for this subject"
-            >
-              <Award size={17} />
-              <span>+ Add Quiz</span>
-            </button>
-          )}
 
           <button
             className="primary-btn"
@@ -647,21 +628,6 @@ export default function SubjectStudy({ initialCourseId, initialTopicId, onStartP
           setTimeout(() => setSuccessMsg(null), 4000);
         }}
       />
-
-      {/* Super Admin Add Quiz Question Modal */}
-      {adminUser && (
-        <QuestionModal
-          isOpen={isAddQuizModalOpen}
-          onClose={() => setIsAddQuizModalOpen(false)}
-          courses={courses}
-          presetCourseId={selectedCourseId}
-          presetTopicId={selectedTopicId !== 'All' ? selectedTopicId : ''}
-          onSave={() => {
-            setSuccessMsg('Quiz question added successfully to this subject!');
-            setTimeout(() => setSuccessMsg(null), 4000);
-          }}
-        />
-      )}
     </div>
   );
 }
